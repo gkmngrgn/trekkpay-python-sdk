@@ -1,9 +1,9 @@
 import base64
+import collections
+import datetime
 import hashlib
 import hmac
 import json
-
-from collections import namedtuple
 
 import requests
 
@@ -15,18 +15,28 @@ class Result(object):
     def __init__(self, response):
         self.status_code = response.status_code
         self.auth_key = response.request.headers.get('Authorization').strip('Basic ')
-        self.data = json.loads(response.text, object_hook=lambda i: namedtuple('Result', i.keys())(*i.values()))
+        self.data = json.loads(response.text, object_hook=self.__convert_json_to_object)
 
     def __getattr__(self, item):
-        return getattr(self.data, item)
+        data = self.data.result if self.is_success else self.data
+        return getattr(data, item)
 
     @property
     def is_success(self):
-        return not hasattr(self, 'error')
+        return not hasattr(self.data, 'error')
+
+    @staticmethod
+    def __convert_json_to_object(item):
+        if 'created_at' in item:
+            # TODO: please make sure the timezone is correct.
+            created_at = datetime.datetime.strptime(
+                item['created_at'], '%Y-%m-%dT%H:%M:%S+0000').replace(tzinfo=datetime.timezone.utc)
+            item.update({'created_at': created_at})
+        return collections.namedtuple('Result', item.keys())(*item.values())
 
 
 class BaseAPI(object):
-    def __init__(self, config, sandbox=False):
+    def __init__(self, config):
         self.config = config
         self.api_url = config.get_api_url()
 

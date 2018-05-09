@@ -9,11 +9,9 @@ import trekkpay
 class SDKTestCase(unittest.TestCase):
     PUBLIC_KEY = 'api_e702422d73e2efff455021180ba0'
     SECRET_KEY = 'sec_fff455021180ba0e702422d73e2e'
-    AUTH_KEY = ('YXBpX2U3MDI0MjJkNzNlMmVmZmY0NTUwM'
-                'jExODBiYTA6Y2VhOTE4OGIxNzY1ZWEyMG'
-                'VhNGU1OTRlMTNlYTJkNTFlZjFjODc2Nzk'
-                'xODA5NjM0NWZkMDBkYzRlZjQwZThkOQ==')
-    MERCHANT_ID = 100001
+    AUTH_KEY = ('YXBpX2U3MDI0MjJkNzNlMmVmZmY0NTUwMjExODBiYTA6ZDcyYTllODIzYjYzMTNjOD'
+                'k2MjhlY2QxNWMxY2RiZGI1ZjFiMDdlNjM3MGEyOGQzYTQ1YWNlODY5NWY4YzNhMA==')
+    MERCHANT_ID = 101001
 
     def setUp(self):
         self.config = trekkpay.Config(public_key=self.PUBLIC_KEY, secret_key=self.SECRET_KEY)
