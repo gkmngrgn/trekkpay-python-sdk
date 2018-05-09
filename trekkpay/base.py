@@ -10,9 +10,11 @@ import requests
 
 class Result(object):
     status_code = None
+    auth_key = None
 
     def __init__(self, response):
         self.status_code = response.status_code
+        self.auth_key = response.request.headers.get('Authorization').strip('Basic ')
         self.data = json.loads(response.text, object_hook=lambda i: namedtuple('Result', i.keys())(*i.values()))
 
     def __getattr__(self, item):

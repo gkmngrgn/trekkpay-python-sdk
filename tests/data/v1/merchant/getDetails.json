@@ -1,0 +1,56 @@
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": {
+        "merchant_id": 101001,
+        "name": "alaGeek",
+        "integrator_id": "alageek",
+        "trekksoft_id": null,
+        "dcc_display_option": "a",
+        "created_at": "2018-03-22T10: 35: 37+0000",
+        "is_verified": true,
+        "is_insurance_enabled": true,
+        "is_3d_secure_required": true,
+        "is_dunned": false,
+        "address": {
+            "country": "TR"
+        },
+        "contact": {
+            "name": "Gökmen Görgen",
+            "email": "gkmngrgn@gmail.com",
+            "phone": null
+        },
+        "payout_fees": [],
+        "bank_accounts": {
+            "EUR": {
+                "currency": "EUR",
+                "payout_fee": null,
+                "account": {
+                "number": "???"
+                },
+                "holder": {
+                    "name": "???",
+                    "address1": "???",
+                    "address2": null,
+                    "zip": "???",
+                    "city": "???",
+                    "country": "CH"
+                },
+                "bank": {
+                    "name": "???",
+                    "address1": "???",
+                    "address2": null,
+                    "zip": "???",
+                    "city": "???",
+                    "country": "CH",
+                    "swift": "AAAAAA"
+                },
+                "note": null
+            }
+        },
+        "payout_minimum_amount": 0,
+        "payout_withholding_amount": 0,
+        "payout_cycle": "weekly",
+        "payout_type": "transaction_date"
+    }
+}

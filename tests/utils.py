@@ -1,4 +1,6 @@
+import os
 import unittest
+import json
 import responses
 
 import trekkpay
@@ -7,6 +9,10 @@ import trekkpay
 class SDKTestCase(unittest.TestCase):
     PUBLIC_KEY = 'api_e702422d73e2efff455021180ba0'
     SECRET_KEY = 'sec_fff455021180ba0e702422d73e2e'
+    AUTH_KEY = ('YXBpX2U3MDI0MjJkNzNlMmVmZmY0NTUwM'
+                'jExODBiYTA6Y2VhOTE4OGIxNzY1ZWEyMG'
+                'VhNGU1OTRlMTNlYTJkNTFlZjFjODc2Nzk'
+                'xODA5NjM0NWZkMDBkYzRlZjQwZThkOQ==')
     MERCHANT_ID = 100001
 
     def setUp(self):
@@ -15,8 +21,7 @@ class SDKTestCase(unittest.TestCase):
         self.responses = responses
 
     def prepare_mock_data(self, r, mock_data):
-        mock_data.update({
-            'jsonrpc': '2.0',
-            'id': 1
-        })
+        file_path = os.path.join(os.path.dirname(__file__), 'data', '{}.json'.format(mock_data.replace('.', os.sep)))
+        with open(file_path, 'r') as json_file:
+            mock_data = json.loads(json_file.read())
         r.add(responses.POST, self.config.get_api_url(), json=mock_data, status=200)
