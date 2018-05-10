@@ -28,9 +28,7 @@ class Result(object):
     @staticmethod
     def __convert_json_to_object(item):
         if 'created_at' in item:
-            # TODO: please make sure the timezone is correct.
-            created_at = datetime.datetime.strptime(
-                item['created_at'], '%Y-%m-%dT%H:%M:%S+0000').replace(tzinfo=datetime.timezone.utc)
+            created_at = datetime.datetime.strptime(item['created_at'], '%Y-%m-%dT%H:%M:%S%z')
             item.update({'created_at': created_at})
         return collections.namedtuple('Result', item.keys())(*item.values())
 
