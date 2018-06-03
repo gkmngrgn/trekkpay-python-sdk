@@ -19,12 +19,12 @@ TODO: Add description here.
 | transaction.authorize       | TO DO        |
 | transaction.cancel          | TO DO        |
 | transaction.capture         | TO DO        |
-| transaction.getDocQuote     | TO DO        |
+| transaction.getDccQuote     | TO DO        |
 | transaction.getDetails      | TO DO        |
 | transaction.pay             | TO DO        |
 | transaction.refund          | TO DO        |
 | transaction.reverse         | TO DO        |
 | transaction.void            | TO DO        |
-| transaction.search          | TO DO        |
+| transactions.search         | TO DO        |
 | vault.makeReservation       | TO DO        |
 | vault.storeCreditCard       | TO DO        |
