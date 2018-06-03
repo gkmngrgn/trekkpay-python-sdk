@@ -7,7 +7,7 @@ TODO: Add description here.
 | Endpoint                    | Status       |
 |-----------------------------|--------------|
 | merchant.create             | TO DO        |
-| merchant.getDetails         | NEED TO TEST |
+| merchant.getDetails         | DONE         |
 | merchant.removeBankAccount  | TO DO        |
 | merchant.setBankAccount     | TO DO        |
 | merchant.update             | TO DO        |
