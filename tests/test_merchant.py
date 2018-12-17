@@ -1,34 +1,31 @@
 import datetime
+
 import responses
 
 from tests.utils import SDKTestCase
-from trekkpay.utils import PayoutCycle, PayoutType
+from trekkpay.utils import UserRole
 
 
 class TestMerchant(SDKTestCase):
     @responses.activate
-    def test_get_merchant_details(self):
+    def test_create_user(self):
+        self.prepare_mock_data(responses, mock_data='v1.merchant.createUser')
+        result = self.client.merchant.create_user(
+            merchant_id=self.MERCHANT_ID,
+            display_name='Gökmen Görgen',
+            email='gokmen@localhost',
+            password='0123456789',
+            roles=[UserRole.INTEGRATOR])
+        self.assertEqual(result.status_code, 200)
+        self.assertTrue(result.is_success)
+
+    @responses.activate
+    def test_get_details(self):
         self.prepare_mock_data(responses, mock_data='v1.merchant.getDetails')
         result = self.client.merchant.get_details(merchant_id=self.MERCHANT_ID)
-        created_at = datetime.datetime(2018, 3, 22, 10, 35, 37, tzinfo=datetime.timezone.utc)
-
+        self.assertEqual(result.status_code, 200)
         self.assertTrue(result.is_success)
-        self.assertEqual(result.merchant_id, self.MERCHANT_ID)
-        self.assertEqual(result.name, 'alaGeek')
-        self.assertEqual(result.integrator_id, 'alageek')
-        self.assertEqual(result.trekksoft_id, None)
-        self.assertEqual(result.dcc_display_option, 'a')
+
+        # Check datetime conversion
+        created_at = datetime.datetime(2018, 3, 22, 10, 35, 37, tzinfo=datetime.timezone.utc)
         self.assertEqual(result.created_at, created_at)
-        self.assertEqual(result.is_verified, True)
-        self.assertEqual(result.is_insurance_enabled, True)
-        self.assertEqual(result.is_3d_secure_required, True)
-        self.assertEqual(result.is_dunned, False)
-        self.assertEqual(result.address.country, 'DE')
-        self.assertEqual(result.contact.name, 'Gökmen Görgen')
-        self.assertEqual(result.contact.email, 'gkmngrgn@gmail.com')
-        self.assertEqual(result.contact.phone, '+4915212345678')
-        self.assertEqual(result.payout_fees, [])
-        self.assertEqual(result.payout_minimum_amount, 0)
-        self.assertEqual(result.payout_withholding_amount, 0)
-        self.assertEqual(result.payout_cycle, PayoutCycle.WEEKLY)
-        self.assertEqual(result.payout_type, PayoutType.TRANSACTION_DATE)
