@@ -1,6 +1,8 @@
 /dist/
-/venv/
+/htmlcov/
 /tmp/
+/venv/
 __pycache__
+.coverage
 *.py[cod]
 *.egg-info/
