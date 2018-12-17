@@ -1,4 +1,5 @@
-from trekkpay import errors
+from trekkpay import exceptions
+from trekkpay import utils
 from trekkpay.config import Config
 from trekkpay.merchant import Merchant
 
