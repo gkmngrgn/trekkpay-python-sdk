@@ -16,6 +16,7 @@ class Result(object):
         self.status_code = response.status_code
         self.auth_key = response.request.headers.get('Authorization').strip('Basic ')
         self.data = json.loads(response.text, object_hook=self.__convert_json_to_object)
+        self.json = response.json()
 
     def __getattr__(self, item):
         data = self.data.result if self.is_success else self.data
