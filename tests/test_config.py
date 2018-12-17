@@ -1,5 +1,4 @@
 import trekkpay
-
 from tests.utils import SDKTestCase
 
 

@@ -1,6 +1,7 @@
+import json
 import os
 import unittest
-import json
+
 import responses
 
 import trekkpay

@@ -1,6 +1,6 @@
 import responses
-import trekkpay
 
+import trekkpay
 from tests.utils import SDKTestCase
 
 
@@ -11,8 +11,8 @@ class TestAuth(SDKTestCase):
         client = trekkpay.Client(config=trekkpay.Config(public_key=self.SECRET_KEY, secret_key=self.PUBLIC_KEY))
         result = client.merchant.get_details(merchant_id=self.MERCHANT_ID)
         self.assertFalse(result.is_success)
-        self.assertEqual(result.error.code, trekkpay.errors.CODE_AUTH_FAILED)
-        self.assertEqual(result.error.message, trekkpay.errors.MSG_AUTH_FAILED)
+        self.assertEqual(result.error.code, trekkpay.exceptions.CODE_AUTH_FAILED)
+        self.assertEqual(result.error.message, 'Authentication failed: Invalid API key.')
         self.assertNotEqual(result.auth_key, self.AUTH_KEY)
 
     @responses.activate
